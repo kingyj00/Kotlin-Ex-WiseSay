@@ -16,7 +16,7 @@ fun main() {
                 print("작가 : ")
                 val author = readlnOrNull() ?: ""
                 quotes.add(Pair(quote, author))
-                println("명언이 등록되었습니다!")
+                println("${quotes.size}번 명언이 등록되었습니다.")
             }
             "종료" -> {
                 println("프로그램을 종료합니다.")
