@@ -1,7 +1,5 @@
 package com.ll
-// 등록, 목록, 삭제 , 종료
-// 삭제 시, 삭제?id= 가 아니라 삭제를 입력하면 원하는 번호를 물어보고
-// 번호를 입력하면 삭제되는 방식으로 변경
+
 fun main() {
     println("===[ 명언 앱 ]===")
 
@@ -43,6 +41,28 @@ fun main() {
                     println("${deleteId}번 명언이 삭제되었습니다.")
                 } else {
                     println("${deleteId}번 명언은 존재하지 않습니다.")
+                }
+            }
+            "수정" -> {
+                print("몇 번 명언을 수정하시겠습니까? ")
+                val editId = readlnOrNull()?.toIntOrNull()
+                val index = quotes.indexOfFirst { it.first == editId }
+
+                if (editId == null || index == -1) {
+                    println("${editId}번 명언은 존재하지 않습니다.")
+                } else {
+                    val (num, oldQuote, oldAuthor) = quotes[index]
+
+                    println("명언(기존) : $oldQuote")
+                    print("명언 : ")
+                    val newQuote = readlnOrNull()?.ifBlank { oldQuote } ?: oldQuote
+
+                    println("작가(기존) : $oldAuthor")
+                    print("작가 : ")
+                    val newAuthor = readlnOrNull()?.ifBlank { oldAuthor } ?: oldAuthor
+
+                    quotes[index] = Triple(num, newQuote, newAuthor)
+                    println("${editId}번 명언이 수정되었습니다.")
                 }
             }
             "종료" -> {
