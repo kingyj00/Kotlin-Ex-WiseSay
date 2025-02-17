@@ -21,6 +21,13 @@ fun main() {
                 println("${id}번 명언이 등록되었습니다.")
                 id++
             }
+            "목록" -> {
+                println("번호 / 작가 / 명언")
+                println("----------------------")
+                quotes.reversed().forEach { (num, q, a) ->
+                    println("$num / $a / $q")
+                }
+            }
             "종료" -> {
                 println("프로그램을 종료합니다.")
                 break
