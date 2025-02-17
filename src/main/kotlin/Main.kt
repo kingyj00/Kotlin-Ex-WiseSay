@@ -3,7 +3,8 @@ package com.ll
 fun main() {
     println("===[ 명언 앱 ]===")
 
-    val quotes = mutableListOf<Pair<String, String>>()
+    val quotes = mutableListOf<Triple<Int, String, String>>()
+    var id = 1
 
     while (true) {
         print("명령) ")
@@ -15,8 +16,10 @@ fun main() {
                 val quote = readlnOrNull() ?: ""
                 print("작가 : ")
                 val author = readlnOrNull() ?: ""
-                quotes.add(Pair(quote, author))
-                println("${quotes.size}번 명언이 등록되었습니다.")
+
+                quotes.add(Triple(id, quote, author))
+                println("${id}번 명언이 등록되었습니다.")
+                id++
             }
             "종료" -> {
                 println("프로그램을 종료합니다.")
