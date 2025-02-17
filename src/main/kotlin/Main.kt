@@ -10,8 +10,8 @@ fun main() {
         print("명령) ")
         val command = readlnOrNull()?.trim()
 
-        when (command) {
-            "등록" -> {
+        when {
+            command == "등록" -> {
                 print("명언 : ")
                 val quote = readlnOrNull() ?: ""
                 print("작가 : ")
@@ -21,14 +21,22 @@ fun main() {
                 println("${id}번 명언이 등록되었습니다.")
                 id++
             }
-            "목록" -> {
+            command == "목록" -> {
                 println("번호 / 작가 / 명언")
                 println("----------------------")
                 quotes.reversed().forEach { (num, q, a) ->
                     println("$num / $a / $q")
                 }
             }
-            "종료" -> {
+            command?.startsWith("삭제?id=") == true -> {
+                val deleteId = command.substringAfter("삭제?id=").toIntOrNull()
+                if (deleteId != null && quotes.removeIf { it.first == deleteId }) {
+                    println("${deleteId}번 명언이 삭제되었습니다.")
+                } else {
+                    println("해당 번호의 명언이 존재하지 않습니다.")
+                }
+            }
+            command == "종료" -> {
                 println("프로그램을 종료합니다.")
                 break
             }
