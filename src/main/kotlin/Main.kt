@@ -4,6 +4,7 @@ fun main() {
     println("===[ 명언 앱 ]===")
 
     val quotes = mutableListOf<Triple<Int, String, String>>()
+    val deletedIds = mutableSetOf<Int>()
     var id = 1
 
     while (true) {
@@ -16,6 +17,10 @@ fun main() {
                 val quote = readlnOrNull() ?: ""
                 print("작가 : ")
                 val author = readlnOrNull() ?: ""
+
+                while (deletedIds.contains(id)) {
+                    id++
+                }
 
                 quotes.add(Triple(id, quote, author))
                 println("${id}번 명언이 등록되었습니다.")
@@ -31,9 +36,10 @@ fun main() {
             command?.startsWith("삭제?id=") == true -> {
                 val deleteId = command.substringAfter("삭제?id=").toIntOrNull()
                 if (deleteId != null && quotes.removeIf { it.first == deleteId }) {
+                    deletedIds.add(deleteId)
                     println("${deleteId}번 명언이 삭제되었습니다.")
                 } else {
-                    println("해당 번호의 명언이 존재하지 않습니다.")
+                    println("${deleteId}번 명언은 존재하지 않습니다.")
                 }
             }
             command == "종료" -> {
